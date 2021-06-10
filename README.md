@@ -309,10 +309,12 @@ j:1
 举个例子：
 fib(5) = fib(4) + fib(3)
 fib(4) = fib(3) + fib(2)
+fib(3) = fib(2) + fib(1)
+
 fib(n){
   if(n===1) return 0;
   if(n===2) return 1;
-  
+
   return fib(n-1)+fib(n-2)
 
 }
