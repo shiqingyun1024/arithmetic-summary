@@ -338,7 +338,30 @@ fib(n){
         {value:9}
     ]}
 ]
+<!-- 方法一 -->
+fib(arr){
+  let result = []
+  for(let i = 0, length = arr.length; i < length; i++){
+    if(typeof arr[i] == 'number'){
+       result.push({value:arr[i]})
+    }else if(Array.isArray(arr[i])){
+      result.push({children:fib(arr[i])})
+    }
+  }
+  return result
+}
+
+<!-- 方法二 用map映射方法-->
+fib(item){
+  if(typeof item == 'number'){
+       return {value:item}
+    }else if(Array.isArray(item)){
+      return {children:item.map(_item=>fib(_item))}
+    }
+}
+
 ```
+
 
 
 
