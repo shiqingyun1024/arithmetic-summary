@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归思想--多维数组</title>
+</head>
+
+<body>
+    <script>
+        // 试将多维数组[1,2,[3,[4,5],6],7,[8],9]变为下面所示的对象
+        // [
+        //         { value: 1 },
+        //         { value: 2 },
+        //         {
+        //             children: [
+        //                 { value: 3 },
+        //                 {
+        //                     children: [
+        //                         { value: 4 },
+        //                         { value: 5 },
+        //                     ]
+        //                 },
+        //                 { value: 6 }
+        //             ]
+        //         },
+        //         { value: 7 },
+        //         {
+        //             children: [
+        //                 { value: 8 },
+        //                 { value: 9 }
+        //             ]
+        //         }
+        //   ]
+        // 转换函数，写法一
+        function convert(arr){
+           // 准备一个结果数组
+           var result = [];
+           // 遍历传入的arr的每一项   
+           for(let i = 0, length = arr.length; i < length; i++){
+            //    如果遍历到的数字是number，直接放入
+               if(typeof arr[i] == 'number'){
+                result.push({value:arr[i]})
+               }else if(Array.isArray(arr[i])){
+                //    如果遍历到的是数组，那么就递归
+                result.push({children:convert(arr[i])})
+               }
+           }
+           return result
+        }
+        // 转换函数，写法一
+        function convert2(item){
+            if(typeof item == 'number'){
+                return {value:item}
+            }else if(Array.isArray(item)){
+                // 如果传进来的参数是数组
+                return{
+                    children:item.map(_item=>convert2(_item))
+                }
+            }
+        }
+        let arr = [1,2,[3,[4,5],6],7,[8],9]
+        console.log(convert(arr));
+        // console.log(arr2);
+
+    </script>
+</body>
+
+</html>

@@ -314,11 +314,32 @@ fib(3) = fib(2) + fib(1)
 fib(n){
   if(n===1) return 0;
   if(n===2) return 1;
-
   return fib(n-1)+fib(n-2)
-
 }
 ```
+### 递归思想2
+```
+试将多维数组[1,2,[3,[4,5],6],7,[8],9]变为下面所示的对象
+
+[
+    {value:1},
+    {value:2},
+    {children:[
+        {value:3},
+        {children:[
+           {value:4},
+           {value:5},
+        ]},
+        {value:6}
+    ]},
+    {value:7},
+    {children:[
+        {value:8},
+        {value:9}
+    ]}
+]
+```
+
 
 
 
