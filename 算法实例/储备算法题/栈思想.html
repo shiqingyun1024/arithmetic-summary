@@ -24,6 +24,52 @@
          * . 如果这个字符是字母，那么此时就把栈顶这项改为这个字母
          * . 如果这个字符是]，那么就将数字弹栈，就把字符串栈的栈顶的元素重复刚刚的这个次数，弹栈，拼接到新栈顶上。
          * */
+        //  常用的正则表达式方法 replace search match test
+        // 'abc123asd2n3n4n4'.replace(/\d/g,'');
+        // 'abcasdnnn'
+
+        // 'abc123asd2n3n4n4'.search(/\d/g);
+        // 3
+        // search会找出第一个符合的
+
+        // 'abc123asd2n3n4n4'.match(/\d/);
+        // ["1", index: 3, input: "abc123asd2n3n4n4", groups: undefined]
+        // 如果不加g，会找出第一个
+
+        // 'abc123asd2n3n4n4'.match(/\d/g);
+        // ["1", "2", "3", "2", "3", "4", "4"]
+        // 如果加g（全局搜索），会找出所有符合条件的
+
+        // /^\d/.test('abc')
+        // false
+
+        // /^\d/.test('2abc')
+        // true
+
+
+        function smartRepeat(){
+            var index = 0;
+            // 栈1，存放数字
+            var stack1 = [];
+            // 栈2，存放临时字符串
+            var stack2 = [];
+            // 剩余部分
+            var rest = templateStr;
+
+            while(index < templateStr.length -1){
+                // 剩余部分
+                rest = templateStr.substring(index);
+                // 看当前剩余部分是不是以数字和[开头
+                if(/^\d+\[/.test(rest)){
+                    console.log('以数字开头');
+                }
+                index++;
+            }
+        }
+
+
+
+
 
     </script>
 </body>
