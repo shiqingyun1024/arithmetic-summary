@@ -59,14 +59,11 @@
             var rest = templateStr;
 
             while(index < templateStr.length -1){
-                console.log(index,stack1,stack2);
                 // 剩余部分
                 rest = templateStr.substring(index);
                 // 看当前剩余部分是不是以数字和[开头
                 if(/^\d+\[/.test(rest)){
-                    console.log('以数字开头');
                     let times = rest.match(/^(\d+)\[/)[1]
-                    console.log(times);
                     // 如果这个字符是数字，那么就把数字压栈（进栈），把空字符串压栈
                     stack1.push(times)
                     stack2.push('')
