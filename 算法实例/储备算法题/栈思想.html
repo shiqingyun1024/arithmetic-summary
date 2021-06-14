@@ -40,6 +40,8 @@
         // ["1", "2", "3", "2", "3", "4", "4"]
         // 如果加g（全局搜索），会找出所有符合条件的
 
+        // 
+
         // /^\d/.test('abc')
         // false
 
@@ -47,7 +49,7 @@
         // true
 
 
-        function smartRepeat(){
+        function smartRepeat(templateStr){
             var index = 0;
             // 栈1，存放数字
             var stack1 = [];
@@ -57,17 +59,46 @@
             var rest = templateStr;
 
             while(index < templateStr.length -1){
+                console.log(index,stack1,stack2);
                 // 剩余部分
                 rest = templateStr.substring(index);
                 // 看当前剩余部分是不是以数字和[开头
                 if(/^\d+\[/.test(rest)){
                     console.log('以数字开头');
+                    let times = rest.match(/^(\d+)\[/)[1]
+                    console.log(times);
+                    // 如果这个字符是数字，那么就把数字压栈（进栈），把空字符串压栈
+                    stack1.push(times)
+                    stack2.push('')
+                    // 让指针后移，times这个数字是多少位就后移多少位加1位
+                    // 为什么要加1位呢？加的1位是[
+                    index += times.toString().length + 1;  
+                }else if(/^\w+\]/.test(rest)){
+                    // 如果这个字符是字母，那么此时就把stack2栈顶这项改为这个字母
+                    let word = rest.match(/^(\w+)\]/)[1]
+                    stack2[stack2.length -1] = word;
+                    // 指针后移，word的长度是多少，就移动多少位
+                    index += word.length;
+                }else if(rest[0] == ']'){
+                    // 如果这个字符是]，那么就将stack1数字弹栈，stack2弹栈，就把字符串栈的栈顶的元素重复刚刚的这个次数，拼接到新栈顶上，注意是拼接到后面
+                    let times = stack1.pop()
+                    let word = stack2.pop()
+                    // repeat是es6的语法，重复多少次，如果''a'.repeat(3) 是’aaa‘
+                    stack2[stack2.length-1] += word.repeat(times)
+                    index++
+                }else{
+                    index++
                 }
-                index++;
+                
             }
+
+            // while结束之后，stack1和stack2中肯定还剩余1项。返回栈2中剩下的这一项，重复栈1中剩下的这1项次数，组成的这个字符串。如果剩余的个数不对
+            // 那就是用户的问题，方括号没有闭合
+            return stack2[0].repeat(stack1[0])
         }
 
-
+        let repeatString = smartRepeat('2[1[a]2[b]3[c]]')
+        console.log(repeatString);
 
 
 
