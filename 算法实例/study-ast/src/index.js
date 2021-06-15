@@ -1,3 +1,4 @@
+import parse from './parse'
 var templateString = `
    <div>
       <h3>你好</h3>
@@ -8,3 +9,5 @@ var templateString = `
       </ul>
    </div>
 `;
+parse(templateString)
+console.log(parse(templateString));
