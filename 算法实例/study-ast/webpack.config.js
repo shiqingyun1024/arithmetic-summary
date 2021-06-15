@@ -1,7 +1,7 @@
 // 因为webpack是基于node的，所以遵循common.js规范
 module.exports = {
     // 入口
-    enrty:'./src/index.js',
+    entry:'./src/index.js',
     // 出口
     output:{
         // 虚拟打包路径，就是说文件夹不会真正生成，而是在8080端口虚拟生成
