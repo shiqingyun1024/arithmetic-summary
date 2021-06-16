@@ -10,4 +10,4 @@ var templateString = `
    </div>
 `;
 parse(templateString)
-console.log(parse(templateString));
+console.log(parse(templateString) );
