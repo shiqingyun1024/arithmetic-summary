@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二分查找</title>
+</head>
+<body>
+    <script>
+        // 自己给自己出的一道简单的运算题，有一组排序好的整数型数组，以最少的遍历方式找到其中给定的值。
+        // 例如：数组 [1,2,3,4,5,6,7,8,9]  以最少的遍历找到6，并返回它的下标
+        function findIndex(array,index){
+           let l = 0;
+           let r = array.length;
+           while(l<r){
+               const mid = l + Math.floor((r-l)/2)
+               if(array[mid] === index){
+                   console.log(mid);
+                   return mid
+               }else if(array[mid] > index){
+                   r = mid;
+               }else if(array[mid] < index){
+                   // 因为mid已经排除了，所以不需要包含mid了。   
+                   l = mid + 1;
+               }
+           }
+        }
+        let array = [1,2,3,4,5,6,7,8,9];
+        // let index = 6;
+        let index = 9;
+        findIndex(array,index)
+    </script>
+</body>
+</html>
