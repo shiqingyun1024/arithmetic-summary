@@ -25,7 +25,7 @@ var groupAnagrams = function (strs) {
     let strsMap = new Map()
     for (let str of strs) {
         // 字符串先转化成数组，然后对数组进行排序，排序之后，再转化为字符串。（相同字母组成的字符串最后转为的字符串都是一样的值）
-        let switchStr = str.split('').sort().join('');
+        let switchStr = str.split('').sort().join('');// 这里注意split和join的用法，传入分割的字符
         // 如果map中包含转化后的字符串，则把这个str push到数组中
         if (strsMap.has(switchStr)) {
             strsMap.get(switchStr).push(str);
