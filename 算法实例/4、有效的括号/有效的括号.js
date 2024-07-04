@@ -59,6 +59,7 @@ var isValid = function (s) {
         } else if (char in bracketMap) { // 如果是右括号
             // 栈为空或者栈顶的左括号与当前的右括号不匹配，则字符串无效
             if (!stack.length || stack.pop() !== bracketMap[char]) {
+                // stack.pop()是关键点，每次都是队尾截取一个字符，并且原数组会改变
                 return false;
             }
         } else {// 如果遇到了非括号字符，也可以根据题目的具体要求决定如何处理，这里假设输入只包含括号
