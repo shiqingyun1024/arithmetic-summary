@@ -45,7 +45,7 @@ function threeSum(nums) {
     const result = [];
 
     for (let i = 0; i < nums.length - 2; i++) {
-        // 跳过相同的元素以去重
+        // 跳过相同的元素以去重(这一步很精妙)
         if (i > 0 && nums[i] === nums[i - 1]) continue;
 
         let left = i + 1, right = nums.length - 1;
@@ -59,7 +59,7 @@ function threeSum(nums) {
                 // 找到了符合条件的三元组
                 result.push([nums[i], nums[left], nums[right]]);
                 // 移动指针并去重
-                while (left < right && nums[left] === nums[left + 1]) left++;
+                while (left < right && nums[left] === nums[left + 1]) left++; // 注意这一步最后的值还是等于原先result.push中的nums[left]的值所以才会在下面又要进行left++
                 while (left < right && nums[right] === nums[right - 1]) right--;
                 left++;
                 right--;
