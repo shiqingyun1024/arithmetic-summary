@@ -58,3 +58,37 @@ function isPalindrome(s) {
 // 最后比较原字符串与反转后的字符串是否相等。这是一种直接且有效的方法来判断一个字符串是否为回文串。
 
 
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function (nums) {
+    // 想到双指针
+    // 对数组进行排序
+    nums.sort((a, b) => a - b)
+    // 定义数组长度
+    let [len, res] = [nums.length, []];
+    // 遍历nums这个数组
+    for (let i = 0; i < len - 2; i++) {
+        // 如果当前值与下一个值相等，则直接跳出本次循环
+        if (i > 0 && nums[i] === nums[i - 1]) continue
+        if (nums[i] > 0) return res;
+        let [left, right] = [i + 1, len - 1]
+        while (left < right) {
+            let sum = nums[i] + nums[left] + nums[right]
+            if (sum < 0) {
+                left++
+            } else if (sum > 0) {
+                right--
+            } else {
+                res.push([nums[i], nums[left], nums[right]]);
+                // 去重处理
+                while (left < right && nums[left] === nums[left + 1]) left++
+                while (left < right && nums[right] === nums[right - 1]) right--
+                left++
+                right--
+            }
+        }
+    }
+    return res
+};
