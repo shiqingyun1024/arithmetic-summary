@@ -1,0 +1,43 @@
+/**
+ * @param {string} s1
+ * @param {string} s2
+ * @return {boolean}
+ */
+var checkInclusion = function (s1, s2) {
+    //  1、先判断s1\s2长度为1的情况下是否相等；
+    //  2、对s1进行排序，因为排序之后，顺序就是固定的。在遍历s2的时候，也要进行对应的排序，这样判断是否相等就可以判断是否包含了。
+    // if (s1.length === 1 && s2.length === 1 && s1 === s2) {
+    //     return true
+    // } else {
+    //     return false
+    // }
+    if (s1.length > s2.length) return false; // s1长度大于s2，不可能为子串
+    // 计算s1中各字符的计数
+    const countMap = new Map();
+    for (const char of s1) {
+        countMap.set(char, (countMap.get(char) || 0) + 1);
+    }
+    console.log(countMap)
+    const windowSize = s1.length;
+    for (let i = 0; i <= s2.length - windowSize; i++) {
+        // 重置滑动窗口的计数映射
+        const tempMap = new Map(countMap);
+        console.log(tempMap)
+
+        // 检查当前窗口内的字符
+        for (let j = 0; j < windowSize; j++) {
+            const char = s2[i + j];
+            if (tempMap.has(char)) {
+                tempMap.set(char, tempMap.get(char) - 1);
+                // 如果计数为0，可以从映射中移除
+                if (tempMap.get(char) === 0) tempMap.delete(char);
+            } else {
+                break; // 当前字符不在s1的映射中，直接跳出循环
+            }
+        }
+        // 如果映射为空，说明当前窗口内的字符与s1的排列一致
+        if (tempMap.size === 0) return true;
+    }
+    return false; // 遍历结束，未找到匹配的子串
+};
+console.log(checkInclusion("ab", "eidbaooo")); // 输出: true
