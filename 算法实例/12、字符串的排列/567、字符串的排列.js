@@ -4,13 +4,6 @@
  * @return {boolean}
  */
 var checkInclusion = function (s1, s2) {
-    //  1、先判断s1\s2长度为1的情况下是否相等；
-    //  2、对s1进行排序，因为排序之后，顺序就是固定的。在遍历s2的时候，也要进行对应的排序，这样判断是否相等就可以判断是否包含了。
-    // if (s1.length === 1 && s2.length === 1 && s1 === s2) {
-    //     return true
-    // } else {
-    //     return false
-    // }
     if (s1.length > s2.length) return false; // s1长度大于s2，不可能为子串
     // 计算s1中各字符的计数
     const countMap = new Map();
@@ -18,9 +11,11 @@ var checkInclusion = function (s1, s2) {
         countMap.set(char, (countMap.get(char) || 0) + 1);
     }
     console.log(countMap)
+    // 定义滑动窗口的大小
     const windowSize = s1.length;
+    // 循环遍历的时候一定要记住减去
     for (let i = 0; i <= s2.length - windowSize; i++) {
-        // 重置滑动窗口的计数映射
+        // 重置滑动窗口的计数映射，为什么要重置滑动窗口？是因为在下面的for j循环中对tempMap进行改动，所以在每次for i循环中都需要对tempMap进行重置
         const tempMap = new Map(countMap);
         console.log(tempMap)
 
@@ -31,7 +26,7 @@ var checkInclusion = function (s1, s2) {
                 tempMap.set(char, tempMap.get(char) - 1);
                 // 如果计数为0，可以从映射中移除
                 if (tempMap.get(char) === 0) tempMap.delete(char);
-            } else {
+            } else { // 如果不是的话，一定要跳出循环，要不然执行会超时
                 break; // 当前字符不在s1的映射中，直接跳出循环
             }
         }
