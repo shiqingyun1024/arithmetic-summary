@@ -13,7 +13,8 @@ var checkInclusion = function (s1, s2) {
     console.log(countMap)
     // 定义滑动窗口的大小
     const windowSize = s1.length;
-    // 循环遍历的时候一定要记住减去
+    // 循环遍历的时候一定要记住减去，这里遍历的范围为什么是<=,这是因为<=时，从0开始遍历一直到最后一个窗口的大小，这个时候最后一个窗口开始的位置还是i，因为最后一个窗口要从i开始的，可以看到里面还有一个for循环，j是从0开始的
+    // 所以这就是为什么要小于等于的原因
     for (let i = 0; i <= s2.length - windowSize; i++) {
         // 重置滑动窗口的计数映射，为什么要重置滑动窗口？是因为在下面的for j循环中对tempMap进行改动，所以在每次for i循环中都需要对tempMap进行重置
         const tempMap = new Map(countMap);
