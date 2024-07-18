@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function deleteMostFrequentChars(str) {
+            if (str.length === 0) {
+                return "";
+            }
+
+            // Step 1: 统计每个字符出现的次数
+            let map = new Map();
+            for (let char of str) {
+                if (map.has(char)) {
+                    map.set(char, map.get(char) + 1)
+                } else {
+                    map.set(char, 1)
+                }
+            }
+            console.log(map)
+            // Step 2: 找到次数最多的那个值
+            let maxCount = 0;
+            map.forEach((value, key) => {
+                console.log(1111)
+                if (value > maxCount) {
+                    maxCount = value;
+                    console.log('1111111')
+                }
+            })
+            // for (let char of map) {
+            //     if (map.get(char) > maxCount) {
+            //         maxCount = map.get(char);
+            //     }
+            // }
+            console.log(maxCount)
+            // Step 3：删除所有出现次数最多的字符
+            let result = ''
+            for (let char of str) {
+                if (map.get(char) < maxCount) {
+                    result = result + char
+                }
+            }
+            return result;
+            // const charCount = {};
+            // for (let char of str) {
+            //     if (charCount[char]) {
+            //         charCount[char]++;
+            //     } else {
+            //         charCount[char] = 1;
+            //     }
+            // }
+
+            // Step 2: 找到出现次数最多的字符
+            // let maxCount = 0;
+            // for (let char in charCount) {
+            //     if (charCount[char] > maxCount) {
+            //         maxCount = charCount[char];
+            //     }
+            // }
+
+            // Step 3: 删除所有出现次数最多的字符
+            // const result = [];
+            // for (let char of str) {
+            //     if (charCount[char] !== maxCount) {
+            //         result.push(char);
+            //     }
+            // }
+
+            // Step 4: 返回剩余的字符数组连接成字符串
+            // return result.join("");
+        }
+        // 示例用法
+        const inputStr = "abbcccddddeeeee";
+        const result = deleteMostFrequentChars(inputStr);
+        const result2 = deleteMostFrequentChars('abc');
+        const result3 = deleteMostFrequentChars('aabbc');
+        console.log(result); // 输出 "abbcccdddd"
+        console.log(result2); // 输出 "aa"
+        console.log(result3); // 输出 "aa"
+    </script>
+</body>
+
+</html>
