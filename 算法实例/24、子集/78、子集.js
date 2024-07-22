@@ -19,5 +19,7 @@ function subsets(nums) {
 }
 
 // 示例
-const nums = [1, 2, 3];
+const nums = [0, 1];
 console.log(subsets(nums)); // 应输出所有子集
+// 1、path:[] result:[[]]
+// 2、path:[0] result:[[],[0]]
