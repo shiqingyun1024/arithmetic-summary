@@ -20,4 +20,17 @@ var peakIndexInMountainArray = function (arr) {
 
 // 第二种解法
 
+var peakIndexInMountainArray2 = function (arr) {
+    let left = 0
+    let right = arr.length - 1
+    while (left < right) {
+        let mid = Math.floor((right + left) / 2)
+        if (arr[mid] < arr[mid + 1]) {
+            left = mid + 1
+        } else {
+            right = mid
+        }
+    }
+    return left
+};
 
